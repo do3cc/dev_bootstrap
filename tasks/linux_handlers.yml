@@ -1,0 +1,4 @@
+---
+- name: install dein package manager
+  command:
+    cmd: sh ~/bin/dein_installer.sh ~/.cache/dein

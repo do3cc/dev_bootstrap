@@ -28,32 +28,36 @@ dotfiles_files:
   - .irssi
 
 apt_packages:
-# for pip install python
+  # for pip install python
   - build-essential
-# stupid thing for ansible
+  - libffi-dev
+  # stupid thing for ansible
   - cowsay
-# git
+  # git
   - git
-# nice process viewer
+  # nice process viewer
   - htop
-# portscanner
+  # portscanner
   - nmap
-# better grep
+  # better grep
   - silversearcher-ag
-# better tmux
+  # better tmux
   - byobu
-# newer vime
+  # newer vime
   - neovim
-# preferred shell
+  # preferred shell
   - zsh
-# search through debian packages
+  # search through debian packages
   - apt-file
-# manage keys
+  # manage keys
   - keychain
-# IRC
+  # IRC
   - irssi
-# nice viewer of git history
+  # nice viewer of git history
   - tig
+  #  python essentials
+  - python3-venv
+  - python3-wheel
 
 # Install packages from other package managers.
 # Note: You are responsible for making sure the required package managers are
