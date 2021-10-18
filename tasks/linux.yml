@@ -19,3 +19,14 @@
     checksum: sha256:c2ffc9e7a4ae85198391a4f27884361fa49a46474e3d92e0796a055c29c0401d
   notify:
     - install dein
+
+- name: Ensure that the neovim config dir exists
+  file:
+    path: ~/.config/nvim
+    state: directory
+
+- name: Ensure that symlink for nvim to vim config exists
+  file:
+    src: ~/.vimrc
+    dest: ~/.config/nvim/init.vim
+    state: link
