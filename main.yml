@@ -1,0 +1,48 @@
+---
+- hosts: all
+
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags: ['always']
+
+  roles:
+    - role: geerlingguy.dotfiles
+      when: configure_dotfiles
+      tags: ['dotfiles']
+
+  tasks:
+    - import_tasks: tasks/sudoers.yml
+      when: configure_sudoers
+      tags: ['sudoers']
+
+    - import_tasks: tasks/terminal.yml
+      when: configure_terminal
+      tags: ['terminal']
+
+    - import_tasks: tasks/linux.yml
+      when: configure_linux
+      tags: ['linux']
+
+    - import_tasks: tasks/wsl2.yml
+      when: configure_wsl2
+      tags: ['wsl2']
+
+    - import_tasks: tasks/chromebook.yml
+      when: configure_chromebook
+      tags: ['chromebook']
+
+    - import_tasks: tasks/extra-packages.yml
+      tags: ['extra-packages']
+
+    - name: Run configured post-provision ansible task files.
+      include_tasks: "{{ outer_item }}"
+      loop_control:
+        loop_var: outer_item
+      with_fileglob: "{{ post_provision_tasks|default(omit) }}"
+      tags: ['post']
