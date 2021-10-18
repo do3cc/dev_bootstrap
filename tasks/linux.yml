@@ -23,3 +23,13 @@
     cmd: sh ~/bin/dein_installer.sh ~/.cache/dein
   when: dein_installer.changed
 
+- name: Ensure that the neovim config dir exists
+  file:
+    path: ~/.config/nvim
+    state: directory
+
+- name: Ensure that symlink for nvim to vim config exists
+  file:
+    src: ~/.vimrc
+    dest: ~/.config/nvim/init.vim
+    state: link
