@@ -2,4 +2,24 @@
   apt:
     name: "{{ item }}"
     state: present
+  become: true
   with_items: "{{ apt_packages }}"
+
+- name: Ensure that a user specific bin directory exists
+  file:
+    path: ~/bin
+    state: directory
+
+- name: Download dein package manager installer
+  get_url:
+    url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+    dest: ~/bin/dein_installer.sh
+    mode: '0700'
+    checksum: sha256:c2ffc9e7a4ae85198391a4f27884361fa49a46474e3d92e0796a055c29c0401d
+  register: dein_installer
+
+- name: install dein package manager
+  command:
+    cmd: sh ~/bin/dein_installer.sh ~/.cache/dein
+  when: dein_installer.changed
+

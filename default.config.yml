@@ -24,6 +24,7 @@ dotfiles_files:
   - .byobu
   - .tmux.conf
   - .gitconfig
+  - .gitmessage.txt
   - .irssi
 
 apt_packages:
@@ -53,7 +54,6 @@ apt_packages:
   - irssi
 # nice viewer of git history
   - tig
-
 
 # Install packages from other package managers.
 # Note: You are responsible for making sure the required package managers are
