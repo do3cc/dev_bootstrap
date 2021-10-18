@@ -30,3 +30,9 @@
     src: ~/.vimrc
     dest: ~/.config/nvim/init.vim
     state: link
+
+- name: Use zsh!
+  user:
+    name: do3cc
+    shell: /usr/bin/zsh
+  become: true
